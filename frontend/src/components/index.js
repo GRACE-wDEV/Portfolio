@@ -9,6 +9,8 @@ import Feedbacks from "./Feedbacks";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import ProjectModal from "./ProjectModal";
+import Repos from "./Repos";
+import Now from "./Now";
 
 
 export {
@@ -25,5 +27,7 @@ export {
   EarthCanvas, 
   BallCanvas, 
   ComputersCanvas, 
-  StarsCanvas
+  StarsCanvas,
+  Repos,
+  Now
 };

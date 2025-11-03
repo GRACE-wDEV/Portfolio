@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
@@ -13,6 +13,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
+  const location = useLocation();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -47,6 +48,28 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [toggle]);
 
+  const handleNavClick = (nav) => {
+    setActive(nav.title);
+    setToggle(false);
+    
+    if (nav.id === 'repos' || nav.id === 'now') {
+      // These are separate pages, no scroll needed
+      return;
+    }
+    
+    // For sections on home page, always navigate to home first if not there
+    if (location.pathname !== '/') {
+      window.location.href = `/#${nav.id}`;
+      return;
+    }
+    
+    // Scroll to section if on home page
+    const element = document.getElementById(nav.id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav
       className={`${
@@ -78,9 +101,15 @@ const Navbar = () => {
               className={`${
                 active === nav.title ? "text-white" : "text-secondary"
               } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
+              onClick={() => handleNavClick(nav)}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
+              {nav.id === 'repos' || nav.id === 'now' ? (
+                <Link to={`/${nav.id}`}>{nav.title}</Link>
+              ) : location.pathname !== '/' ? (
+                <a href={`/#${nav.id}`}>{nav.title}</a>
+              ) : (
+                <a href={`#${nav.id}`}>{nav.title}</a>
+              )}
             </li>
           ))}
         </ul>
@@ -107,12 +136,15 @@ const Navbar = () => {
                   className={`font-poppins font-medium cursor-pointer text-[16px] ${
                     active === nav.title ? "text-white" : "text-secondary"
                   }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
+                  onClick={() => handleNavClick(nav)}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  {nav.id === 'repos' || nav.id === 'now' ? (
+                    <Link to={`/${nav.id}`}>{nav.title}</Link>
+                  ) : location.pathname !== '/' ? (
+                    <a href={`/#${nav.id}`}>{nav.title}</a>
+                  ) : (
+                    <a href={`#${nav.id}`}>{nav.title}</a>
+                  )}
                 </li>
               ))}
             </ul>

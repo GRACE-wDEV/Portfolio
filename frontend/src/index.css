@@ -13,6 +13,28 @@
   color-scheme: dark;
 }
 
+/* Character hover effect styles */
+.char {
+  display: inline-block;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+/* Hide scrollbar for webkit browsers */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+.aboutText {
+  position: relative;
+  z-index: 1;
+}
+
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;

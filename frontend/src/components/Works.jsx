@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
@@ -88,6 +88,7 @@ const ProjectCard = ({
 const Works = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const scrollContainerRef = useRef(null);
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
@@ -97,6 +98,26 @@ const Works = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedProject(null);
+  };
+
+  const scrollNext = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 380; // 360px card + 20px gap
+      scrollContainerRef.current.scrollBy({
+        left: cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollPrev = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 380; // 360px card + 20px gap
+      scrollContainerRef.current.scrollBy({
+        left: -cardWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -116,18 +137,76 @@ const Works = () => {
           links to code repositories and live demos in it. It reflects my
           ability to solve complex problems, work with different technologies,
           and manage projects effectively.
-        </motion.p>
+        </motion.p> 
       </div>
 
-      <div className='mt-20 flex flex-wrap gap-7'>
-        {projects.map((project, index) => (
-          <ProjectCard 
-            key={`project-${index}`} 
-            index={index} 
-            {...project} 
-            onCardClick={() => handleProjectClick(project)}
-          />
-        ))}
+      {/* Projects Carousel Container */}
+      <div className='relative mt-20 overflow-hidden'>
+        {/* Horizontal Scrolling Container */}
+        <div 
+          ref={scrollContainerRef}
+          className='flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-6'
+          style={{
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            paddingRight: '2rem'
+          }}
+        >
+          {projects.map((project, index) => (
+            <div 
+              key={`project-${index}`}
+              className='flex-shrink-0 w-[calc(33.333%-1rem)]'
+              style={{ 
+                scrollSnapAlign: 'start',
+                minWidth: '360px'
+              }}
+            >
+              <ProjectCard 
+                index={index} 
+                {...project} 
+                onCardClick={() => handleProjectClick(project)}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Polished Navigation Buttons */}
+        <div className='absolute bottom-2 right-6 flex gap-3'>
+          <motion.button
+            onClick={scrollPrev}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className='group w-12 h-12 bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg border border-white/20 hover:border-white/40'
+          >
+            <svg 
+              className='w-6 h-6 text-white group-hover:text-white transition-colors duration-200' 
+              fill='none' 
+              stroke='currentColor' 
+              viewBox='0 0 24 24'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2.5} d='M15 19l-7-7 7-7' />
+            </svg>
+          </motion.button>
+          
+          <motion.button
+            onClick={scrollNext}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className='group w-12 h-12 bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg border border-white/20 hover:border-white/40'
+          >
+            <svg 
+              className='w-6 h-6 text-white group-hover:text-white transition-colors duration-200' 
+              fill='none' 
+              stroke='currentColor' 
+              viewBox='0 0 24 24'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2.5} d='M9 5l7 7-7 7' />
+            </svg>
+          </motion.button>
+        </div>
+        
+        {/* Subtle fade effect on the right edge */}
+        <div className='absolute right-0 top-0 bottom-6 w-16 bg-gradient-to-l from-primary to-transparent pointer-events-none'></div>
       </div>
 
       <ProjectModal

@@ -101,7 +101,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
             exit="exit"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-black-200">
+            <div className="flex items-center justify-between p-6 ">
               <div className="flex items-center space-x-4">
                 <img
                   src={project.image}
@@ -113,7 +113,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                   <p className="text-secondary text-sm">Project Details</p>
                 </div>
               </div>
-              
+                
               <button
                 onClick={onClose}
                 className="w-10 h-10 rounded-full bg-black-100 hover:bg-black-200 transition-colors duration-200 flex items-center justify-center group"
@@ -127,9 +127,9 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
             </div>
 
             {/* Tab Navigation */}
-            <div className="flex border-b border-black-200">
+            <div className="flex ">
               <motion.button
-                className={`flex-1 py-4 px-6 text-center font-semibold transition-all duration-300 relative ${
+                className={` py-4 ml-8 px-6 rounded-lg text-center font-semibold transition-all duration-300 relative ${
                   activeTab === "overview"
                     ? "text-white bg-black-100"
                     : "text-secondary hover:text-white hover:bg-black-200"
@@ -149,7 +149,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
               </motion.button>
               
               <motion.button
-                className={`flex-1 py-4 px-6 text-center font-semibold transition-all duration-300 relative ${
+                className={`ml-2 py-4 px-6 rounded-lg text-center font-semibold transition-all duration-300 relative ${
                   activeTab === "preview"
                     ? "text-white bg-black-100"
                     : "text-secondary hover:text-white hover:bg-black-200"

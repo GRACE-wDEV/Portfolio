@@ -6,6 +6,9 @@ import web from "./web.png";
 import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
+import me from './logo.png';
+import codeforces from './company/codeforces.png';
+import cineverse from './cineverse.png';
 
 import css from "./tech/css.png";
 import docker from "./tech/docker.png";
@@ -31,7 +34,12 @@ import stem from "./company/stem.svg";
 
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
+import stemforces from "./stemforces.png";
+import gzoor from "./gzoor.png";
+import hackclub from "./hackclub.png";
+import tictactoe from "./tictactoe.png";
 import tripguide from "./tripguide.png";
+import ghstem from "./ghstem.png";
 
 export {
   logo,
@@ -48,6 +56,7 @@ export {
   git,
   html,
   javascript,
+  codeforces,
   mongodb,
   nodejs,
   reactjs,
@@ -62,7 +71,14 @@ export {
   starbucks,
   tesla,
   stem,
+  ghstem,
+  stemforces,
+  gzoor,
+  hackclub,
+  tictactoe,
+  cineverse,
   carrent,
   jobit,
+  me,
   tripguide,
 };

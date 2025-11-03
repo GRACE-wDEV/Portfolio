@@ -24,7 +24,15 @@ import {
   tesla,
   shopify,
   carrent,
+  stemforces,
+  gzoor,
+  cineverse,
+  hackclub,
+  ghstem,
+  codeforces,
+  tictactoe,
   jobit,
+  me,
   tripguide,
   threejs,
 } from "../assets";
@@ -37,6 +45,14 @@ export const navLinks = [
   {
     id: "work",
     title: "Work",
+  },
+  {
+    id: "repos",
+    title: "Repos",
+  },
+  {
+    id: "now",
+    title: "Now",
   },
   {
     id: "contact",
@@ -125,6 +141,7 @@ const experiences = [
     icon: elzero,
     iconBg: "#005ecc",
     date: "Oct 2022 - June 2023",
+    link: "https://elzero.org/",
     points: [
       "Learned HTML, CSS, and JavaScript with Elzero Web School.",
       "Completed all coursework and assignments.",
@@ -138,6 +155,7 @@ const experiences = [
     icon: stem,
     iconBg: "#000",
     date: "Sep 2023 - Present",
+    link: "https://stemgharbiya.app/",
     points: [
       "Paused web dev a bit to focus on the rigor of school and my first research project",
       "Finished 4 Research Projects; currently doing the fifth!",
@@ -147,28 +165,30 @@ const experiences = [
   },
   {
     title: "Competitive Programming",
-    company_name: "Shopify",
-    icon: shopify,
-    iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
+    company_name: "Codeforces",
+    icon: codeforces,
+    iconBg: "#fff",
+    date: "Jun 2024 - Present",
+    link: "https://codeforces.com/profile/igrace",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Started competitive programming on Codeforces (igrace).",
+      "Solved over 477 problems ranging from 800 to 2700 difficulty.",
+      "Read Competitive Programming's Handbook by Antti Laaksonen.",
+      "Participated in several contests to improve problem-solving skills",
     ],
   },
   {
     title: "Full stack Developer",
-    company_name: "Meta",
-    icon: meta,
-    iconBg: "#E6DEDD",
+    company_name: "Self-Employed",
+    icon: me,
+    iconBg: "#000",
     date: "Jan 2023 - Present",
+    link: null,
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
+      "Developed 5+ projects including Gharbiya Hack Club, Stemforces, Gzoor Club, and more.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Looking for the next big challenge to level up my skills!",
     ],
   },
 ];
@@ -202,9 +222,9 @@ const testimonials = [
 
 const projects = [
   {
-    name: "Car Rent",
+    name: "Stemforces",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+      "A gamified educational platform for Egypt's STEM students to progress in solving a bunck of worthy materials along with scores, leaderboards, and more!",
     tags: [
       {
         name: "react",
@@ -219,14 +239,40 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
-    source_code_link: "https://github.com/adrianhajdin/project_car_showcase",
-    live_demo: "https://car-rent-demo.vercel.app", // Example URL
+    image: stemforces,
+    source_code_link: "https://github.com/GRACE-wDEV/Stemforces",
+    live_demo: "https://stemforces.vercel.app",
   },
   {
-    name: "Job IT",
+    name: "GH STEM website",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "I insctucted a team of developers to bring the first-ever school website",
+    tags: [
+      {
+        name: "html",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "css",
+        color: "green-text-gradient",
+      },
+      {
+        name: "js",
+        color: "blue-text-gradient"
+      },
+      {
+        name: "django",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: ghstem,
+    source_code_link: "https://github.com/glory-dev/stemgharbiya",
+    live_demo: "https://stemgharbiya.app",
+  },
+  {
+    name: "Gzoor Club",
+    description:
+      "A sustainable carpooling platform connecting students for eco-friendly life at school",
     tags: [
       {
         name: "react",
@@ -241,32 +287,100 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
-    source_code_link: "https://github.com/adrianhajdin/project_next13_job_board",
-    live_demo: "https://job-it-demo.vercel.app", // Example URL
+    image: gzoor,
+    source_code_link: "https://github.com/GRACE-wDEV/Gzoor-Club",
+    live_demo: "https://gzoor-club.vercel.app",
   },
   {
-    name: "Trip Guide",
+    name: "Cineverse",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+      "A movie finder platform along with the trending 5 movies functionality",
     tags: [
       {
-        name: "nextjs",
+        name: "react",
         color: "blue-text-gradient",
       },
       {
-        name: "supabase",
+        name: "tailwind",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "REST api",
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/adrianhajdin/project_travel",
-    live_demo: "https://trip-guide-demo.vercel.app", // Example URL
+    image: cineverse,
+    source_code_link: "https://github.com/GRACE-wDEV/cineverse",
+    live_demo: "https://igrace-cineverse.vercel.app/",
   },
+  // {
+  //   name: "Cocktail",
+  //   description:
+  //     "A GSAP-first website that includes cool animations.",
+  //   tags: [
+  //     {
+  //       name: "react",
+  //       color: "blue-text-gradient",
+  //     },
+  //     {
+  //       name: "tailwind",
+  //       color: "green-text-gradient",
+  //     },
+  //     {
+  //       name: "GSAP",
+  //       color: "pink-text-gradient",
+  //     },
+  //   ],
+  //   image: gzoor,
+  //   source_code_link: "https://github.com/GRACE-wDEV/gsap-cocktail",
+  //   live_demo: "https://gsap-cocktail.vercel.app",
+  // },
+  {
+    name: "GH Hack Club",
+    description:
+      "I designed and developed the first-ever website for the hack club alog fouding the 4th season of the club",
+    tags: [
+      {
+        name: "html",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "css",
+        color: "green-text-gradient",
+      },
+      {
+        name: "js",
+        color: "blue-text-gradient"
+      },
+    ],
+    image: hackclub,
+    source_code_link: "https://github.com/stemgharbiya/hackclub",
+    live_demo: "https://gharbiya.hackclub.com/",
+  },
+  
+  {
+    name: "Tic Tac Toe",
+    description:
+      "A classical Tic tac toe game, but with game history.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "tailwind",
+        color: "green-text-gradient",
+      },
+      {
+        name: "gsap",
+        color: "blue-text-gradient"
+      },
+    ],
+    image: tictactoe,
+    source_code_link: "https://github.com/GRACE-wDEV/Tic-Tac-Toe",
+    live_demo: "https://tic-tac-toe-three-eta-58.vercel.app/",
+  },
+  
 ];
 
 export { services, technologies, experiences, testimonials, projects };
