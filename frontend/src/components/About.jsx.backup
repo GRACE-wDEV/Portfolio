@@ -1,4 +1,4 @@
-﻿import React, { useRef } from "react";
+import React, { useRef } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
@@ -91,53 +91,23 @@ const About = () => {
         <h2 className={styles.sectionHeadText}>Overview.</h2>
       </motion.div>
 
-      <div className="flex justify-between items-center gap-8">
+      <div className="flex justify-between">
         <motion.p
-        ref={aboutTextRef}
+        // ref={aboutTextRef}
         variants={fadeIn("", "", 0.1, 1)}
-        className='aboutText mt-4 text-secondary text-[18px] leading-[30px] max-w-3xl cursor-default select-text'
+        className='aboutText mt-4 text-secondary text-[24px] leading-[35px] max-w-3xl cursor-default select-none'
       >
-        Hi, I'm Ahmed. I build things—mostly with code, sometimes with ideas that take longer to compile.
-        <br/><br/>
-        I'm a student at Gharbiya STEM High School, where curiosity is a survival skill and problem-solving is daily practice. I like systems, patterns, and questions that don't have obvious answers. Code feels less like typing and more like thinking out loud.
-        <br/><br/>
-        I work across web development and AI concepts, not to collect tools, but to understand how things actually work. I care about clarity, usefulness, and building things that don't just run—but make sense.
-        <br/><br/>
-        <span className="text-cyan-400 font-semibold">Still learning. Still breaking things. Still fixing them better the second time.</span>
+        I’m Ahmed — a STEM-driven developer and problem solver fueled by the same passion I have for my morning <span className="text-amber-300">coffee</span>.
+
+        I don’t see coding or math as tasks; I see them as puzzles begging to be solved, stories waiting to unfold. From complex algorithms to crafting interactive web experiences, I’m addicted to that rush of finding elegant solutions.
+
+        I study at Gharbiya STEM High School, where competition runs high and curiosity runs deeper. Whether it’s tackling Olympiad-level math, building front-end projects with React, or diving into AI concepts, I’m always chasing the next challenge — the next cup of coffee that keeps me wired and alive.
+
+        I don’t believe in regrets — only lessons, growth, and grit. Every bug fixed, every problem solved, every idea tested brings me closer to mastery.
+
+        The goal? To build things that matter — products that merge logic, creativity, and heart.
         </motion.p>
-        
-        {/* Image with retro background */}
-        <div className="relative flex-shrink-0">
-          {/* Retro squares pattern background */}
-          <div className="absolute -inset-4 opacity-30">
-            <div className="grid grid-cols-6 gap-2 w-full h-full">
-              {Array.from({ length: 36 }).map((_, i) => (
-                <div 
-                  key={i} 
-                  className="border border-purple-500/20 bg-purple-900/10"
-                  style={{
-                    animation: `pulse ${2 + (i % 3)}s ease-in-out infinite`,
-                    animationDelay: `${(i % 6) * 0.1}s`
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-          
-          {/* Image with dimmed overlay */}
-          <div className="relative w-72 h-72 rounded-lg overflow-hidden">
-            <img 
-              src="./me.jpg" 
-              className="w-full h-full object-cover" 
-              style={{ objectPosition: '50% 35%' }}
-              alt="Ahmed" 
-            />
-            {/* Multiple overlay layers for dimming */}
-            <div className="absolute inset-0 bg-black/30"></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-cyan-900/40"></div>
-            <div className="absolute inset-0 backdrop-blur-[0.5px]"></div>
-          </div>
-        </div>
+        <img src="./me.jpg" className="pointer-events-none object-cover w-80 rounded-full " alt="" />
       </div>
 
       <div className='mt-20 flex flex-wrap gap-10'>

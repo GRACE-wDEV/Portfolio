@@ -23,61 +23,81 @@ const ProjectCard = ({
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
         options={{
-          max: 45,
-          scale: 1,
+          max: 35,
+          scale: 1.02,
           speed: 450,
         }}
-        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
+        className='relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f1624] p-6 rounded-3xl sm:w-[360px] w-full shadow-2xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 overflow-hidden group'
       >
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
         <div 
-          className='cursor-pointer group'
+          className='cursor-pointer relative z-10'
           onClick={onCardClick}
         >
-          <div className='relative w-full h-[230px]'>
+          {/* Image Container with Better Styling */}
+          <div className='relative w-full h-[230px] mb-5 rounded-2xl overflow-hidden shadow-lg'>
             <img
               src={image}
-              alt='project_image'
-              className='w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300'
+              alt={name}
+              className='w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75'
             />
 
-            <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
+            {/* Gradient Overlay on Image */}
+            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+
+            {/* Top Right Actions */}
+            <div className='absolute top-3 right-3 flex gap-2'>
               <div
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(source_code_link, "_blank");
                 }}
-                className='black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer hover:scale-110 transition-transform duration-200 z-10'
+                className='bg-black/70 backdrop-blur-sm w-10 h-10 rounded-full flex justify-center items-center cursor-pointer hover:bg-purple-600 hover:scale-110 transition-all duration-200 z-20 shadow-lg'
               >
                 <img
                   src={github}
                   alt='source code'
-                  className='w-1/2 h-1/2 object-contain'
+                  className='w-5 h-5 object-contain invert'
                 />
               </div>
             </div>
             
-            {/* Overlay for click indication */}
-            <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100'>
-              <span className='text-white font-semibold bg-black bg-opacity-50 px-4 py-2 rounded-lg'>
-                Click to view details
+            {/* Hover Overlay with Call to Action */}
+            <div className='absolute inset-0 bg-gradient-to-t from-purple-900/90 via-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6'>
+              <span className='text-white font-bold text-sm bg-purple-600/90 backdrop-blur-sm px-6 py-2.5 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300'>
+                View Details →
               </span>
             </div>
           </div>
 
-          <div className='mt-5'>
-            <h3 className='text-white font-bold text-[24px]'>{name}</h3>
-            <p className='mt-2 text-secondary text-[14px]'>{description}</p>
-          </div>
+          {/* Content Section */}
+          <div className='space-y-3'>
+            {/* Title with Icon */}
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500"></div>
+              <h3 className='text-white font-bold text-[22px] group-hover:text-purple-400 transition-colors duration-300'>
+                {name}
+              </h3>
+            </div>
 
-          <div className='mt-4 flex flex-wrap gap-2'>
-            {tags.map((tag) => (
-              <p
-                key={`${name}-${tag.name}`}
-                className={`text-[14px] ${tag.color}`}
-              >
-                #{tag.name}
-              </p>
-            ))}
+            {/* Description */}
+            <p className='text-gray-300 text-[14px] leading-relaxed line-clamp-3'>
+              {description}
+            </p>
+
+            {/* Tags */}
+            <div className='flex flex-wrap gap-2 pt-2'>
+              {tags.map((tag) => (
+                <span
+                  key={`${name}-${tag.name}`}
+                  className={`text-[12px] font-medium px-3 py-1 rounded-full bg-gradient-to-r ${tag.color} bg-opacity-20 border border-current/20 hover:border-current/40 transition-all duration-200`}
+                >
+                  #{tag.name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </Tilt>
@@ -141,24 +161,26 @@ const Works = () => {
       </div>
 
       {/* Projects Carousel Container */}
-      <div className='relative mt-20 overflow-hidden'>
-        {/* Horizontal Scrolling Container */}
+      <div className='relative mt-20'>
+        {/* Horizontal Scrolling Container with enhanced styling */}
         <div 
           ref={scrollContainerRef}
-          className='flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-6'
+          className='flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth pb-8'
           style={{
             scrollSnapType: 'x mandatory',
             WebkitOverflowScrolling: 'touch',
-            paddingRight: '2rem'
+            paddingRight: '2rem',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
           }}
         >
           {projects.map((project, index) => (
             <div 
               key={`project-${index}`}
-              className='flex-shrink-0 w-[calc(33.333%-1rem)]'
+              className='flex-shrink-0'
               style={{ 
                 scrollSnapAlign: 'start',
-                minWidth: '360px'
+                width: 'clamp(320px, 360px, 90vw)'
               }}
             >
               <ProjectCard 
@@ -170,16 +192,19 @@ const Works = () => {
           ))}
         </div>
 
-        {/* Polished Navigation Buttons */}
-        <div className='absolute bottom-2 right-6 flex gap-3'>
+        {/* Enhanced Navigation Buttons */}
+        <div className='absolute -bottom-4 right-6 flex gap-3 z-10'>
           <motion.button
             onClick={scrollPrev}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className='group w-12 h-12 bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg border border-white/20 hover:border-white/40'
+            whileHover={{ scale: 1.1, x: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className='group relative w-14 h-14 bg-gradient-to-br from-purple-600/90 to-purple-800/90 backdrop-blur-md hover:from-purple-500 hover:to-purple-700 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl border-2 border-purple-400/30 hover:border-purple-300/60 overflow-hidden'
           >
+            {/* Animated background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400/0 via-purple-400/30 to-purple-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+            
             <svg 
-              className='w-6 h-6 text-white group-hover:text-white transition-colors duration-200' 
+              className='w-6 h-6 text-white relative z-10 group-hover:-translate-x-0.5 transition-transform duration-200' 
               fill='none' 
               stroke='currentColor' 
               viewBox='0 0 24 24'
@@ -190,12 +215,15 @@ const Works = () => {
           
           <motion.button
             onClick={scrollNext}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className='group w-12 h-12 bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg border border-white/20 hover:border-white/40'
+            whileHover={{ scale: 1.1, x: 2 }}
+            whileTap={{ scale: 0.95 }}
+            className='group relative w-14 h-14 bg-gradient-to-br from-cyan-600/90 to-cyan-800/90 backdrop-blur-md hover:from-cyan-500 hover:to-cyan-700 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl border-2 border-cyan-400/30 hover:border-cyan-300/60 overflow-hidden'
           >
+            {/* Animated background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/30 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+            
             <svg 
-              className='w-6 h-6 text-white group-hover:text-white transition-colors duration-200' 
+              className='w-6 h-6 text-white relative z-10 group-hover:translate-x-0.5 transition-transform duration-200' 
               fill='none' 
               stroke='currentColor' 
               viewBox='0 0 24 24'
@@ -205,8 +233,9 @@ const Works = () => {
           </motion.button>
         </div>
         
-        {/* Subtle fade effect on the right edge */}
-        <div className='absolute right-0 top-0 bottom-6 w-16 bg-gradient-to-l from-primary to-transparent pointer-events-none'></div>
+        {/* Enhanced fade effect on edges */}
+        <div className='absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-primary via-primary/60 to-transparent pointer-events-none'></div>
+        <div className='absolute left-0 top-0 bottom-8 w-12 bg-gradient-to-r from-primary via-primary/60 to-transparent pointer-events-none'></div>
       </div>
 
       <ProjectModal

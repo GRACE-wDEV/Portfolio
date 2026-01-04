@@ -28,48 +28,57 @@ const RepoCard = ({ repo, index }) => {
   };
 
   return (
-    <Tilt
-      options={{
-        max: 45,
-        scale: 1,
-        speed: 450,
-      }}
-      className="xs:w-[350px] w-full"
-    >
-      <motion.div
-        variants={fadeIn("up", "spring", index * 0.1, 0.75)}
-        className='w-full bg-gradient-to-r from-purple-500 to-cyan-500 p-[1px] rounded-[20px] shadow-lg'
+    <motion.div variants={fadeIn("up", "spring", index * 0.1, 0.75)}>
+      <Tilt
+        options={{
+          max: 35,
+          scale: 1.02,
+          speed: 100,
+        }}
+        className='relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f1624] p-6 rounded-3xl sm:w-[360px] w-full shadow-2xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 overflow-hidden group'
       >
-        <div className='bg-[#1a1a2e] rounded-[20px] py-5 px-6 min-h-[280px] flex flex-col justify-between'>
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <div className='relative z-10 min-h-[280px] flex flex-col justify-between'>
           <div>
+            {/* Header with GitHub Link */}
             <div className="flex justify-between items-start mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-                <h3 className="text-white text-xl font-bold">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500"></div>
+                <h3 className='text-white font-bold text-[20px] group-hover:text-purple-400 transition-colors duration-300'>
                   {repo.name}
                 </h3>
               </div>
-              <motion.a
+              <a
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors"
+                onClick={(e) => e.stopPropagation()}
+                className='bg-black/70 backdrop-blur-sm w-10 h-10 rounded-full flex justify-center items-center cursor-pointer hover:bg-purple-600 hover:scale-110 transition-all duration-200 shadow-lg'
               >
-                <img src={github} alt="github" className="w-6 h-6 filter invert" />
-              </motion.a>
+                <img
+                  src={github}
+                  alt='github'
+                  className='w-5 h-5 object-contain invert'
+                />
+              </a>
             </div>
 
-            <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+            {/* Description */}
+            <p className='text-gray-300 text-[14px] leading-relaxed mb-4 line-clamp-3'>
               {repo.description || "A cool project worth exploring! 🚀"}
             </p>
 
+            {/* Tags - Language and Topics */}
             <div className="flex flex-wrap gap-2 mb-4">
               {repo.language && (
                 <span 
-                  className="px-3 py-1 rounded-full text-xs font-medium text-white"
-                  style={{ backgroundColor: getLanguageColor(repo.language) }}
+                  className="text-[12px] font-medium px-3 py-1 rounded-full border border-current/20 hover:border-current/40 transition-all duration-200"
+                  style={{ 
+                    color: getLanguageColor(repo.language),
+                    backgroundColor: `${getLanguageColor(repo.language)}20`
+                  }}
                 >
                   {repo.language}
                 </span>
@@ -77,7 +86,7 @@ const RepoCard = ({ repo, index }) => {
               {repo.topics?.slice(0, 2).map((topic, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1 bg-gray-700 rounded-full text-xs text-purple-300 font-medium"
+                  className="text-[12px] font-medium px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 hover:border-purple-500/40 transition-all duration-200"
                 >
                   #{topic}
                 </span>
@@ -85,62 +94,80 @@ const RepoCard = ({ repo, index }) => {
             </div>
           </div>
 
-          <div className="flex justify-between text-xs text-gray-400">
+          {/* Stats Footer */}
+          <div className="flex justify-between items-center text-sm">
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1">
-                <span className="text-yellow-400">⭐</span>
-                {repo.stargazers_count}
+              <div className="flex items-center gap-1.5 text-gray-400 group-hover:text-yellow-400 transition-colors">
+                <span>⭐</span>
+                <span className="font-medium">{repo.stargazers_count}</span>
               </div>
-              <div className="flex items-center gap-1">
-                <span className="text-blue-400">🍴</span>
-                {repo.forks_count}
+              <div className="flex items-center gap-1.5 text-gray-400 group-hover:text-cyan-400 transition-colors">
+                <span>🍴</span>
+                <span className="font-medium">{repo.forks_count}</span>
               </div>
             </div>
-            <div className="text-xs text-gray-400">
+            <div className="text-xs text-gray-500">
               {new Date(repo.updated_at).toLocaleDateString()}
             </div>
           </div>
         </div>
-      </motion.div>
-    </Tilt>
+      </Tilt>
+    </motion.div>
   );
 };
 
 const CodingStats = ({ stats }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      <motion.div 
-        variants={fadeIn("right", "spring", 0, 0.75)}
-        className='w-full bg-gradient-to-r from-purple-500 to-cyan-500 p-[1px] rounded-[20px] shadow-lg'
-      >
-        <div className='bg-[#1a1a2e] rounded-[20px] py-5 px-6 min-h-[180px] flex flex-col justify-center items-center'>
-          <div className="text-4xl mb-2">📊</div>
-          <h3 className="text-white text-xl font-bold mb-2">Total Repos</h3>
-          <p className="text-gray-300 text-lg">{stats.totalRepos}</p>
+    <div className="flex items-center justify-between mb-16">
+      {/* Left side - Title */}
+      <div className="flex items-center gap-4">
+        <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-cyan-600 rounded-2xl flex items-center justify-center">
+          <span className="text-3xl">📊</span>
         </div>
-      </motion.div>
+        <div>
+          <h2 className="text-white text-3xl font-bold">Coding Stats</h2>
+          <p className="text-gray-400 text-sm">(last year)</p>
+        </div>
+      </div>
 
-      <motion.div 
-        variants={fadeIn("up", "spring", 0.2, 0.75)}
-        className='w-full bg-gradient-to-r from-purple-500 to-cyan-500 p-[1px] rounded-[20px] shadow-lg'
-      >
-        <div className='bg-[#1a1a2e] rounded-[20px] py-5 px-6 min-h-[180px] flex flex-col justify-center items-center'>
-          <div className="text-4xl mb-2">⭐</div>
-          <h3 className="text-white text-xl font-bold mb-2">Total Stars</h3>
-          <p className="text-gray-300 text-lg">{stats.totalStars}</p>
-        </div>
-      </motion.div>
+      {/* Right side - Stats Cards */}
+      <div className="flex gap-4">
+        <motion.div 
+          variants={fadeIn("right", "spring", 0, 0.75)}
+          className='relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f1624] px-8 py-6 rounded-2xl shadow-2xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 overflow-hidden group'
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className='relative z-10 text-center'>
+            <p className="text-gray-400 text-sm font-semibold mb-1 uppercase tracking-wider">Total Time</p>
+            <p className="text-white text-2xl font-bold">{stats.wakatime?.totalTime || '...'}</p>
+          </div>
+        </motion.div>
 
-      <motion.div 
-        variants={fadeIn("left", "spring", 0.4, 0.75)}
-        className='w-full bg-gradient-to-r from-purple-500 to-cyan-500 p-[1px] rounded-[20px] shadow-lg'
-      >
-        <div className='bg-[#1a1a2e] rounded-[20px] py-5 px-6 min-h-[180px] flex flex-col justify-center items-center'>
-          <div className="text-4xl mb-2">🍴</div>
-          <h3 className="text-white text-xl font-bold mb-2">Total Forks</h3>
-          <p className="text-gray-300 text-lg">{stats.totalForks}</p>
-        </div>
-      </motion.div>
+        <motion.div 
+          variants={fadeIn("up", "spring", 0.1, 0.75)}
+          className='relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f1624] px-8 py-6 rounded-2xl shadow-2xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 overflow-hidden group'
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className='relative z-10 text-center'>
+            <p className="text-gray-400 text-sm font-semibold mb-1 uppercase tracking-wider">Daily Avg</p>
+            <p className="text-white text-2xl font-bold">{stats.wakatime?.dailyAvg || '...'}</p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          variants={fadeIn("left", "spring", 0.2, 0.75)}
+          className='relative bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f1624] px-8 py-6 rounded-2xl shadow-2xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 overflow-hidden group'
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className='relative z-10 text-center'>
+            <p className="text-gray-400 text-sm font-semibold mb-1 uppercase tracking-wider">Top Langs</p>
+            <p className="text-white text-xl font-bold">{stats.wakatime?.topLang || '...'}</p>
+            {stats.wakatime?.secondLang && (
+              <p className="text-gray-400 text-sm">{stats.wakatime.secondLang}</p>
+            )}
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
@@ -149,35 +176,62 @@ const Repos = () => {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [wakatimeStats, setWakatimeStats] = useState(null);
+
+  console.log('Repos component mounted');
+  console.log('Current state:', { repos: repos.length, loading, error });
 
   useEffect(() => {
+    console.log('useEffect triggered');
+    
     const fetchRepos = async () => {
       try {
+        console.log('Fetching repos from GitHub...');
         const response = await axios.get('https://api.github.com/users/GRACE-wDEV/repos', {
           params: {
-            sort: 'updated_at',
+            sort: 'updated',
             direction: 'desc',
             per_page: 100,
             type: 'all'
+          },
+          headers: {
+            'Accept': 'application/vnd.github.v3+json'
           }
         });
         
+        console.log('Repos fetched successfully!');
+        console.log('Number of repos:', response.data.length);
         setRepos(response.data);
       } catch (err) {
-        console.error('Error fetching repos:', err);
+        console.error('❌ Error fetching repos:', err);
+        console.error('Error message:', err.message);
         setError(`Failed to fetch repositories: ${err.message}`);
-      } finally {
-        setLoading(false);
       }
     };
 
-    fetchRepos();
+    const fetchWakatimeStats = async () => {
+      // WakaTime API has CORS restrictions - using static values
+      // Update these values manually from https://wakatime.com/@igrace
+      console.log('Setting WakaTime stats (static values)');
+      setWakatimeStats({
+        totalTime: '127 hrs 8 mins',
+        dailyAvg: '1 hr 55 mins',
+        topLang: 'JavaScript',
+        secondLang: 'C++'
+      });
+    };
+
+    Promise.all([fetchRepos(), fetchWakatimeStats()]).finally(() => {
+      console.log('Setting loading to false');
+      setLoading(false);
+    });
   }, []);
 
   const stats = {
     totalRepos: repos.length,
     totalStars: repos.reduce((sum, repo) => sum + repo.stargazers_count, 0),
-    totalForks: repos.reduce((sum, repo) => sum + repo.forks_count, 0)
+    totalForks: repos.reduce((sum, repo) => sum + repo.forks_count, 0),
+    wakatime: wakatimeStats
   };
 
   if (loading) {
@@ -203,27 +257,31 @@ const Repos = () => {
 
   return (
     <>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>My Code</p>
-        <h2 className={styles.sectionHeadText}>Repositories.</h2>
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <CodingStats stats={stats} />
       </motion.div>
 
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className='mt-4 text-gray-300 text-[17px] max-w-3xl leading-[30px]'
+      <motion.div 
+        className='mt-8 flex flex-wrap gap-7 justify-center'
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.1 }}
       >
-        Here are some of my public repositories on GitHub. Feel free to explore my work and reach out if you'd like to collaborate!
-      </motion.p>
-
-      <div className="mt-12">
-        <CodingStats stats={stats} />
-      </div>
-
-      <div className='mt-8 flex flex-wrap gap-7 justify-center'>
-        {repos.map((repo, index) => (
-          <RepoCard key={repo.id} repo={repo} index={index} />
-        ))}
-      </div>
+        {repos.length === 0 ? (
+          <div className="text-center text-gray-400 py-20">
+            <p className="text-xl mb-4">No repositories found</p>
+            <p className="text-sm">This might be due to GitHub API rate limiting or network issues.</p>
+          </div>
+        ) : (
+          repos.map((repo, index) => (
+            <RepoCard key={repo.id} repo={repo} index={index} />
+          ))
+        )}
+      </motion.div>
 
       <motion.div 
         className="mt-16 text-center"

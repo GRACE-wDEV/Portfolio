@@ -121,8 +121,8 @@ const Now = () => {
       icon: "∫"
     },
     {
-      title: "MBZUAI Dream",
-      description: "Aspiring to join the MBZUAI, where AI is my next cup of coffee. I believe it's the perfect place to blend my passions for math, coding, and innovation. ",
+      title: "Senior Year Journey",
+      description: "Studying for my senior year while preparing for university admissions. Exploring opportunities in AI, computer science, and research programs.",
       icon: "🎓"
     }
   ];
@@ -160,8 +160,7 @@ const Now = () => {
           
           <div className="passion-text text-lg text-secondary leading-relaxed mb-8">
             <p className="mb-4">
-              My days start with a strong cup of coffee and a mind buzzing with ideas. Studying for my senior high school and preparing to dive into the world of AI research at <MathFormula formula={<InlineMath math="\mu \beta \Z \cup \mathcal{AI}" />} delay={.2}/> where AGI is the future.
-              
+              My days start with a strong cup of coffee and a mind buzzing with ideas. Currently studying for my senior year in high school while preparing for university admissions in AI and computer science programs.
             </p>
             <p className="mb-4">
               Every day brings new challenges in algorithms, machine learning, and problem-solving. 
